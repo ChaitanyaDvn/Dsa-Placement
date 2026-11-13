@@ -2,18 +2,27 @@
 using namespace std;
 
 pair<int, int> floorCeil(vector<int>& nums, int x) {
+    int low = 0;
+    int high = nums.size() - 1;
+
     int floorVal = -1;
     int ceilVal = -1;
 
-    for (int i = 0; i < nums.size(); i++) {
+    for (; low <= high;) {
+        int mid = low + (high - low) / 2;
 
-        if (nums[i] <= x) {
-            floorVal = nums[i];
-        }
-
-        if (nums[i] >= x) {
-            ceilVal = nums[i];
+        if (nums[mid] == x) {
+            floorVal = nums[mid];
+            ceilVal = nums[mid];
             break;
+        }
+        else if (nums[mid] < x) {
+            floorVal = nums[mid];
+            low = mid + 1;
+        }
+        else {
+            ceilVal = nums[mid];
+            high = mid - 1;
         }
     }
 
@@ -34,7 +43,7 @@ int main() {
 
     pair<int, int> ans = floorCeil(nums, x);
 
-    cout << ans.first << " " << ans.second << endl;
+    cout << ans.first << " " << ans.second;
 
     return 0;
 }
