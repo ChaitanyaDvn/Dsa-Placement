@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int count = 0;
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+
+            for (int j = i; j < n; j++) {
+                sum += nums[j];
+
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    Solution sol;
+    vector<int> nums = {1, 1, 1};
+    int k = 2;
+
+    int result = sol.subarraySum(nums, k);
+    cout << "Total subarrays with sum " << k << ": " << result << endl;
+
+    return 0;
+}
